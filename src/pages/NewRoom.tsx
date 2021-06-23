@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+/* import { useAuth } from '../hooks/useAuth'; */
 
 import illustrationImg from '../assets/illustration.svg';
 import logoImg from '../assets/logo.svg';
@@ -9,6 +9,8 @@ import '../styles/auth.scss';
 import Button from '../components/Button';
 
 function NewRoom() {
+  /* const { user } = useAuth(); */
+
   return (
     <div id="page-auth">
       <aside>
