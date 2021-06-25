@@ -1,5 +1,11 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import useAuth from '../hooks/useAuth';
+
+import Button from '../components/Button';
+
+import { database } from '../services/firebase';
 
 import illustrationImg from '../assets/illustration.svg';
 import logoImg from '../assets/logo.svg';
@@ -7,12 +13,7 @@ import googleIconImg from '../assets/google-icon.svg';
 
 import '../styles/auth.scss';
 
-import Button from '../components/Button';
-import { useAuth } from '../hooks/useAuth';
-import { useState } from 'react';
-import { database } from '../services/firebase';
-
-function Home() {
+export default function Home() {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState('');
@@ -32,6 +33,11 @@ function Home() {
 
     if (!roomRef.exists()) {
       alert('Room does not exists');
+      return;
+    }
+
+    if (roomRef.val().endedAt) {
+      alert('Room already closed.');
       return;
     }
 
@@ -69,5 +75,3 @@ function Home() {
     </div>
   );
 };
-
-export default Home;
